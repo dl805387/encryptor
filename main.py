@@ -1,16 +1,21 @@
-# This is a sample Python script.
+import pandas as pd
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+encryptionKey = pd.read_csv('decodekeynew.csv')
+
+df = pd.DataFrame(data=encryptionKey)
+
+df['Character'] = df['Character'].astype(str)
+df['Byte'] = df['Byte'].astype(str)
+
+#print(df)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+def split(message):
+    message = str(message)
+    array = []
+    for char in message:
+        array.append(char)
+    return array
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+print(split("33" + " he"))
