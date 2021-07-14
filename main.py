@@ -1,5 +1,6 @@
 import pandas as pd
 import tkinter as tk
+import tkinter.scrolledtext as scrolledtext
 
 encryptionKey = pd.read_csv('decodekeynew.csv')
 
@@ -100,6 +101,7 @@ def decrypt(message):
 
 # this method will create the user interface using Tkinter
 def gui():
+    # when submit button is clicked, then get_result will be called based on the selected radio button
     def get_result():
         message = entry.get()
         choice = v.get()
@@ -140,12 +142,15 @@ def gui():
     radio2 = tk.Radiobutton(root, text='Decrypt', variable=v, value='d', font=("Helvetica", 18))
     canvas.create_window(200, 80, window=radio2)
 
-    text = tk.Text(root, width=40, height=4, borderwidth=0, highlightthickness=0, padx=20, pady=20,
-                   font=("Helvetica", 18))
+    # the text will display the encrypted/decrypted code
+    # text is scrollable if code is longer than 4 lines
+    text = scrolledtext.ScrolledText(root, width=38, height=4, borderwidth=0, highlightthickness=0,
+                                     padx=20, pady=20, font=("Helvetica", 18))
     text.configure(bg=root.cget('bg'), relief="flat")
     text.configure(state="disabled")
     text.pack()
 
+    # gui will appear in the middle of the screen
     root.eval('tk::PlaceWindow %s center' % root.winfo_pathname(root.winfo_id()))
     root.mainloop()
 
