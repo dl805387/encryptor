@@ -2,9 +2,9 @@ import pandas as pd
 import tkinter as tk
 import tkinter.scrolledtext as scrolledtext
 
-encryptionKey = pd.read_csv('decodekeynew.csv')
+encryption_key = pd.read_csv('decodekeynew.csv')
 
-df = pd.DataFrame(data=encryptionKey)
+df = pd.DataFrame(data=encryption_key)
 
 df['Character'] = df['Character'].astype(str)
 df['Byte'] = df['Byte'].astype(str)
@@ -67,6 +67,8 @@ def encrypt(message):
 
 def decrypt(message):
     message = str(message)
+    # remove spaces and new line from the front and end of string
+    message = message.lstrip().rstrip()
     if message == "":
         return "This message/password is empty"
 
