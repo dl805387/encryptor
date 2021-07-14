@@ -1,4 +1,5 @@
 import pandas as pd
+import tkinter as tk
 
 encryptionKey = pd.read_csv('decodekeynew.csv')
 
@@ -102,3 +103,51 @@ print(encrypt("my name is danny ! ЈЇJ"))
 print(decrypt("717d2472657169246d7724686572727d24252423224e"))
 print(encrypt("my name is danny ! ЈЇJ五"))
 print(decrypt("717d2472657169246d7724686572727d24252423224e五"))
+
+
+def gui():
+    def get_result():
+        message = entry.get()
+        choice = v.get()
+
+        if choice == 'e':
+            label['text'] = encrypt(message)
+
+        else:
+            label['text'] = decrypt(message)
+
+    root = tk.Tk()
+    root.title('EncryptINC')
+    root.minsize(width=400, height=300)
+    canvas = tk.Canvas(root, width=400, height=300)
+    canvas.pack()
+    entry = tk.Entry(root)
+    canvas.create_window(200, 140, window=entry)
+    label = tk.Label()
+
+    canvas.create_window(200, 240, window=label)
+    button = tk.Button(text='Submit', command=get_result)
+    canvas.create_window(200, 180, window=button)
+
+    v = tk.StringVar()
+    v.set("e")
+
+    radio = tk.Radiobutton(root, text='Encrypt', variable=v, value='e')
+    canvas.create_window(200, 50, window=radio)
+
+    radio2 = tk.Radiobutton(root, text='Decrypt', variable=v, value='d')
+    canvas.create_window(200, 80, window=radio2)
+
+    root.mainloop()
+
+
+gui()
+
+# this works
+# change variable names
+# maybe make gui pop up in middle of screen (not important)
+# need to be able to copy the label
+# change title name
+# maybe slightly change size of canvas
+# maybe change background color because windows look different than mac
+# maybe a little styling? but keep it minamalist
