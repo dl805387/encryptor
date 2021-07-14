@@ -98,56 +98,56 @@ def decrypt(message):
     return decoded_message
 
 
-# testing
-print(encrypt("my name is danny ! ЈЇJ"))
-print(decrypt("717d2472657169246d7724686572727d24252423224e"))
-print(encrypt("my name is danny ! ЈЇJ五"))
-print(decrypt("717d2472657169246d7724686572727d24252423224e五"))
-
-
+# this method will create the user interface using Tkinter
 def gui():
     def get_result():
         message = entry.get()
         choice = v.get()
 
         if choice == 'e':
-            label['text'] = encrypt(message)
-
+            text.configure(state="normal")
+            text.delete('1.0', tk.END)
+            text.insert(1.0, encrypt(message))
+            text.configure(state="disabled")
+            text.bind("<1>", lambda event: text.focus_set())
+            text.tag_configure("center", justify='center')
+            text.tag_add("center", 1.0, "end")
         else:
-            label['text'] = decrypt(message)
+            text.configure(state="normal")
+            text.delete('1.0', tk.END)
+            text.insert(1.0, decrypt(message))
+            text.configure(state="disabled")
+            text.bind("<1>", lambda event: text.focus_set())
+            text.tag_configure("center", justify='center')
+            text.tag_add("center", 1.0, "end")
 
     root = tk.Tk()
-    root.title('EncryptINC')
-    root.minsize(width=400, height=300)
-    canvas = tk.Canvas(root, width=400, height=300)
+    root.title('Encryptor')
+    root.minsize(width=400, height=220)
+    canvas = tk.Canvas(root, width=400, height=220)
     canvas.pack()
-    entry = tk.Entry(root)
-    canvas.create_window(200, 140, window=entry)
-    label = tk.Label()
 
-    canvas.create_window(200, 240, window=label)
-    button = tk.Button(text='Submit', command=get_result)
-    canvas.create_window(200, 180, window=button)
+    entry = tk.Entry(root, font=("Helvetica", 18))
+    canvas.create_window(200, 140, window=entry)
+
+    button = tk.Button(text='Submit', command=get_result, padx=5, pady=5, font=("Helvetica", 16), cursor="hand2")
+    canvas.create_window(200, 190, window=button)
 
     v = tk.StringVar()
     v.set("e")
-
-    radio = tk.Radiobutton(root, text='Encrypt', variable=v, value='e')
+    radio = tk.Radiobutton(root, text='Encrypt', variable=v, value='e', font=("Helvetica", 18))
     canvas.create_window(200, 50, window=radio)
-
-    radio2 = tk.Radiobutton(root, text='Decrypt', variable=v, value='d')
+    radio2 = tk.Radiobutton(root, text='Decrypt', variable=v, value='d', font=("Helvetica", 18))
     canvas.create_window(200, 80, window=radio2)
 
+    text = tk.Text(root, width=40, height=4, borderwidth=0, highlightthickness=0, padx=20, pady=20,
+                   font=("Helvetica", 18))
+    text.configure(bg=root.cget('bg'), relief="flat")
+    text.configure(state="disabled")
+    text.pack()
+
+    root.eval('tk::PlaceWindow %s center' % root.winfo_pathname(root.winfo_id()))
     root.mainloop()
 
 
 gui()
-
-# this works
-# change variable names
-# maybe make gui pop up in middle of screen (not important)
-# need to be able to copy the label
-# change title name
-# maybe slightly change size of canvas
-# maybe change background color because windows look different than mac
-# maybe a little styling? but keep it minamalist
