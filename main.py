@@ -1,11 +1,15 @@
+# -*- coding: utf-8 -*-
 import pandas as pd
 import tkinter as tk
 import tkinter.scrolledtext as scrolledtext
 
-encryption_key = pd.read_csv('decodekeynew.csv')
+try:
+    encryption_key = pd.read_csv('/Users/dannylin/PycharmProjects/encryptor/decodekeynew.csv')
+except:
+    encryption_key = pd.read_csv('decodekeynew.csv')
+
 
 df = pd.DataFrame(data=encryption_key)
-
 df['Character'] = df['Character'].astype(str)
 df['Byte'] = df['Byte'].astype(str)
 
@@ -14,13 +18,13 @@ df['Byte'] = df['Byte'].astype(str)
 # the 4 rows at the end of the key cannot be shifted down so it starts from the top
 def caesar_cipher(char):
     # finds the encoded byte that is associated with the character
-    if char == "Ѕ":
+    if char == u"Ѕ":
         encoded_byte = df.loc[df['Character'] == " ", 'Byte'].iloc[0]
-    elif char == "І":
+    elif char == u"І":
         encoded_byte = df.loc[df['Character'] == "!", 'Byte'].iloc[0]
-    elif char == "Ї":
+    elif char == u"Ї":
         encoded_byte = df.loc[df['Character'] == '"', 'Byte'].iloc[0]
-    elif char == "Ј":
+    elif char == u"Ј":
         encoded_byte = df.loc[df['Character'] == "#", 'Byte'].iloc[0]
     else:
         encoded_byte = df.loc[df['Character'].shift(4) == char, 'Byte'].iloc[0]
