@@ -1,4 +1,6 @@
 # Encryptor
+
+## About
 This program allows the user to encrypt and decrypt passwords and/or messages. My motivation for creating this project is that I am interested in encryption for better security and I also wanted to create a project where I can learn Python. While creating this project, I have also learned some Pandas and using Python GUI toolkit Tkinter.
 
 ## Features
@@ -12,3 +14,8 @@ This program allows the user to encrypt and decrypt passwords and/or messages. M
 * Python
 * Pandas
 * Tkinter
+
+## Setup
+To run this program, clone the git repository\
+The main.py file contains the python code and it also creates the GUI\
+Run main.py to start the program
